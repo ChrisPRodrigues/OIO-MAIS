@@ -3,7 +3,7 @@ from pathlib import Path
 
 # Configurações de diretórios e arquivos.
 
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parents[3]
 
 ARQUIVO_ENTRADA = (
     BASE_DIR
@@ -18,7 +18,9 @@ ARQUIVO_ENTRADA = (
 ARQUIVO_SAIDA = (
     BASE_DIR
     / "02.Catálogos"
-    / "idrid_metadata.csv"
+    / "METADADOS"
+    / "Treino"
+    / "idrid_train_metadata.csv"
 )
 
 # Classificação original do IDRiD.
@@ -47,7 +49,9 @@ df.columns = df.columns.str.strip()
 
 metadata = pd.DataFrame()
 
-metadata["id_imagem"] = range(1, len(df) + 1)
+metadata["numero_registro"] = range(1, len(df) + 1)
+
+metadata["id_imagem"] = df["Image name"].astype(str)
 
 metadata["dataset"] = "IDRiD"
 
